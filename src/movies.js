@@ -56,7 +56,9 @@ function orderAlphabetically(moviesArray) {
 function turnHoursToMinutes(moviesArray) {
     return moviesArray.map((movie) => {
         const movieCopy = structuredClone(movie);
-        const hours = parseInt(movie.duration.split(' ')[0] ?? 0);
+        // note: the below only works if the movie is at least an hour long
+        // (or if hours are given as 0h even for movies under one hour)
+        const hours = parseInt(movie.duration.split(' ')[0]);
         const minutes = parseInt(movie.duration.split(' ')[1] ?? 0);
 
         movieCopy.duration = 60 * hours + minutes;
